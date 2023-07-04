@@ -1,0 +1,26 @@
+.App {
+    padding: 2vh;
+    min-height: 100vh;
+    background-color: #282c34;
+    color: white;
+}
+
+.App-header {
+    text-align: center;
+    font-size: calc(10px + 2vmin);
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0px;
+}
+
+.rate-container {
+    margin-top: 20px;
+    border-top: 2px solid purple;
+}
+
+.rate-container .MuiSvgIcon {
+    font-size: 2rem;
+}
