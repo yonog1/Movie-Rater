@@ -58,6 +58,20 @@ class RatingViewSet(viewsets.ModelViewSet):
     # defines that any user can query this view set
     permission_classes = (IsAuthenticated,)
 
+    """gets users' rating by user id
+
+    Returns:
+        _type_: _description_
+    """
+
+    @action(methods=["GET"], detail=False)
+    def user_rating(self, request):
+        user_rating = Rating.objects.get(user=request.user)
+        print(user_rating)
+        serializer = RatingSerializer(user_rating, many=False)
+        response = {"message": f"{user_rating.user.id}", "result": serializer.data}
+        return Response(response, status=status.HTTP_200_OK)
+
     def update(self, request, *args, **kwargs):
         response = {"message": "Your request can't be processed"}
         return Response(response, status=status.HTTP_400_BAD_REQUEST)

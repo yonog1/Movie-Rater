@@ -1,7 +1,6 @@
-import React from "react";
-
 function MovieList(props) {
     const movieClicked = (movie) => (event) => {
+        console.log(movie);
         props.movieClicked(movie);
     };
 

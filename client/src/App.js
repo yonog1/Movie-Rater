@@ -11,6 +11,10 @@ function App() {
         setSelectedMovie(movie);
     };
 
+    const loadMovie = (movie) => {
+        setSelectedMovie(movie);
+    };
+
     useEffect(() => {
         fetch("http://localhost:8000/api/movies/", {
             method: "GET",
@@ -31,7 +35,7 @@ function App() {
             </header>
             <div className="layout">
                 <MovieList movies={movies} movieClicked={movieClicked} />
-                <MoiveDetails movie={selectedMovie} movies={movies} />
+                <MoiveDetails movie={selectedMovie} updateMovie={loadMovie} />
             </div>
         </div>
     );

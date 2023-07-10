@@ -23,9 +23,35 @@ export default function MoiveDetails(props) {
                 body: JSON.stringify({ stars: rating + 1 }),
             }
         )
+            .then(() => getDetails())
+            .then(() => {
+                setHilighted(rating + 1);
+            })
+            .catch((error) => console.log(error));
+    };
+
+    const getDetails = () => {
+        fetch(`http://localhost:8000/api/movies/${props.movie.id}/`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Token cf288f63b90ef73f06723c15c93359636ee1db8c",
+            },
+        })
+            .then((response) => response.json())
+            .then((response) => props.updateMovie(response))
+            .catch((error) => console.log(error));
+
+        fetch(`http://localhost:8000/api/movies/user_rating/`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Token cf288f63b90ef73f06723c15c93359636ee1db8c",
+            },
+        })
             .then((response) => response.json())
             .then((response) => console.log(response))
-            .catch((e) => console.log(e));
+            .catch((error) => console.log(error));
     };
 
     return (
@@ -35,22 +61,26 @@ export default function MoiveDetails(props) {
                     <h1>{props.movie.title}</h1>
                     <p>{props.movie.description}</p>
                     {/*console.log(props.movie.avg_rating)*/}
-                    {[...Array(props.movie.avg_rating)].map((val, index) => {
-                        return (
-                            <Fragment key={index}>
-                                <StarRate style={{ color: "yellow" }} />
-                            </Fragment>
-                        );
-                    })}
-                    {[...Array(NUMBER_OF_STARS - props.movie.avg_rating)].map(
-                        (val, index) => {
+                    <Fragment>
+                        {[...Array(props.movie.avg_rating)].map(
+                            (val, index) => {
+                                return (
+                                    <Fragment key={index}>
+                                        <StarRate style={{ color: "yellow" }} />
+                                    </Fragment>
+                                );
+                            }
+                        )}
+                        {[
+                            ...Array(NUMBER_OF_STARS - props.movie.avg_rating),
+                        ].map((val, index) => {
                             return (
                                 <Fragment key={index}>
                                     <StarRate style={{ color: "white" }} />
                                 </Fragment>
                             );
-                        }
-                    )}
+                        })}
+                    </Fragment>
                     ({props.movie.number_of_ratings})
                     <div className="rate-container">
                         <h2>Rate it</h2>
