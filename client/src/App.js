@@ -4,6 +4,7 @@ import MoiveDetails from "./components/MoiveDetails";
 import MovieList from "./components/MovieList";
 
 function App() {
+    console.log(process.env.REACT_APP_TOKEN);
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState([]);
 
@@ -20,7 +21,7 @@ function App() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Token cf288f63b90ef73f06723c15c93359636ee1db8c",
+                Authorization: process.env.REACT_APP_TOKEN,
             },
         })
             .then((response) => response.json())

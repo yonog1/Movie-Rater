@@ -17,8 +17,7 @@ export default function MoiveDetails(props) {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization:
-                        "Token cf288f63b90ef73f06723c15c93359636ee1db8c",
+                    Authorization: process.env.REACT_APP_TOKEN,
                 },
                 body: JSON.stringify({ stars: rating + 1 }),
             }
@@ -35,7 +34,7 @@ export default function MoiveDetails(props) {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Token cf288f63b90ef73f06723c15c93359636ee1db8c",
+                Authorization: process.env.REACT_APP_TOKEN,
             },
         })
             .then((response) => response.json())
@@ -46,7 +45,7 @@ export default function MoiveDetails(props) {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Token cf288f63b90ef73f06723c15c93359636ee1db8c",
+                Authorization: process.env.REACT_APP_TOKEN,
             },
         })
             .then((response) => response.json())
